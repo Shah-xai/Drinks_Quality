@@ -1,0 +1,63 @@
+dataset:
+  name: water_potability
+  description: >
+    Schema for water quality dataset with binary target Potability.
+    Continuous chemistry features may contain missing values.
+
+target:
+  name: Potability
+  dtype: int
+  nullable: false
+  allowed_values: [0, 1]
+
+features:
+  ph:
+    dtype: float
+    nullable: true
+    min: 0.0
+    max: 14.0
+
+  Hardness:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+  Solids:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+  Chloramines:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+  Sulfate:
+    dtype: float
+    nullable: true
+    min: 0.0
+
+  Conductivity:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+  Organic_carbon:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+  Trihalomethanes:
+    dtype: float
+    nullable: true
+    min: 0.0
+
+  Turbidity:
+    dtype: float
+    nullable: false
+    min: 0.0
+
+constraints:
+  allow_extra_columns: false
+  allow_missing_columns: false
+  max_missing_percentage_per_column: 20.0

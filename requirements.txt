@@ -10,4 +10,3 @@ ensure
 fastapi
 joblib
 tqdm
--e .
