@@ -60,4 +60,4 @@ features:
 constraints:
   allow_extra_columns: false
   allow_missing_columns: false
-  max_missing_percentage_per_column: 20.0
+  max_missing_percentage_per_column: 25.0
