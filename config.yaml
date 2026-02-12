@@ -8,6 +8,12 @@ data_validation:
   root_dir: artifacts/data_validation
   data_file: artifacts/data_ingestion/water_potability.csv
   report_file_path: artifacts/data_validation/report.yaml
-
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_file: artifacts/data_ingestion/water_potability.csv
+model_training:
+  root_dir: artifacts/model_training
+  data_file: artifacts/data_transformation/train_transformed.csv
+  model_file: artifacts/model_training/model.pkl
 
 

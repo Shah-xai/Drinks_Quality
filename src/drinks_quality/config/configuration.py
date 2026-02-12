@@ -1,6 +1,6 @@
 from drinks_quality import logger
 from drinks_quality.utils.common import read_yaml, create_directories
-from drinks_quality.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from drinks_quality.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from drinks_quality.constants import *
 
 class Configuration:
@@ -28,5 +28,14 @@ class Configuration:
             data_file=data_validation_info.get("data_file", ""),
             report_file_path=data_validation_info.get("report_file_path", ""),
             schema=self.schema_info
+        )
+    def get_data_transformation_config(self):
+        data_transformation_info = self.config_info.get("data_transformation", {})
+        create_directories([data_transformation_info.get("root_dir", "")])
+        return DataTransformationConfig(
+            root_dir=data_transformation_info.get("root_dir", ""),
+            data_file=data_transformation_info.get("data_file", ""),
+            target_column=self.schema_info.get("target", {}).get("name", "")
+
         )
     

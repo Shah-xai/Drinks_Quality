@@ -12,3 +12,9 @@ class DataValidationConfig:
     data_file: Path
     report_file_path: Path
     schema : dict
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    data_file: Path
+    target_column: str
+    
