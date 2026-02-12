@@ -1,14 +1,16 @@
 from drinks_quality import logger
 from drinks_quality.utils.common import read_yaml, create_directories
-from drinks_quality.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from drinks_quality.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 from drinks_quality.constants import *
 
 class Configuration:
     def __init__(self, config_file_path = CONFIG_FILE_PATH, 
-                 schema_file_path = SCHEMA_FILE_PATH
+                 schema_file_path = SCHEMA_FILE_PATH,
+                 param_file_path = PARAMS_FILE_PATH
                  ):
         self.config_info = read_yaml(config_file_path)
         self.schema_info = read_yaml(schema_file_path)
+        self.param_info = read_yaml(param_file_path)
         logger.info(f"Configuration loaded from {config_file_path}")
         create_directories([self.config_info.get("artifact_root", "artifacts")])
     
@@ -37,5 +39,16 @@ class Configuration:
             data_file=data_transformation_info.get("data_file", ""),
             target_column=self.schema_info.get("target", {}).get("name", "")
 
+        )
+    def get_model_trainer_config(self):
+        model_trainer_info = self.config_info.get("model_trainer", {})
+        create_directories([model_trainer_info.get("root_dir", "")])
+        return ModelTrainerConfig(
+            root_dir=model_trainer_info.get("root_dir", ""),
+            data_file=model_trainer_info.get("data_file", ""),
+            model_name=model_trainer_info.get("model_name", ""),
+            class_weight=self.param_info.get("class_weight", ""),
+            kernel=self.param_info.get("kernel", ""),
+            target_column=self.schema_info.get("target", {}).get("name", "")
         )
     

@@ -17,4 +17,12 @@ class DataTransformationConfig:
     root_dir: Path
     data_file: Path
     target_column: str
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    data_file: Path
+    model_name: str
+    class_weight: str
+    kernel: str
+    target_column: str
     

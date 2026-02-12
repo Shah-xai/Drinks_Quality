@@ -1,3 +1,2 @@
-SVC:
   class_weight: balanced
   kernel: rbf

@@ -11,9 +11,8 @@ data_validation:
 data_transformation:
   root_dir: artifacts/data_transformation
   data_file: artifacts/data_ingestion/water_potability.csv
-model_training:
-  root_dir: artifacts/model_training
+model_trainer:
+  root_dir: artifacts/model_trainer
   data_file: artifacts/data_transformation/train_transformed.csv
-  model_file: artifacts/model_training/model.pkl
-
+  model_name: model.joblib
 
