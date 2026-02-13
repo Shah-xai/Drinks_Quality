@@ -25,4 +25,10 @@ class ModelTrainerConfig:
     class_weight: str
     kernel: str
     target_column: str
-    
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    model_file: Path
+    data_file: Path
+    metrics_file_name: str
+    target_column: str

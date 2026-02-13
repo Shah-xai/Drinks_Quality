@@ -1,6 +1,7 @@
 import os
 from drinks_quality.entity.config_entity import ModelTrainerConfig 
 from drinks_quality.utils.common import save_bin 
+from drinks_quality import logger
 from sklearn.svm import SVC
 import pandas as pd
 
@@ -10,7 +11,7 @@ class ModelTrainer:
 
     def train_model(self):
         # Placeholder for model training logic
-        print(f"Training model with data from {self.config.data_file} and saving to {self.config.root_dir}")
+        logger.info(f"Training model with data from {self.config.data_file} and saving to {self.config.root_dir}")
         # Load the training data
         data = pd.read_csv(self.config.data_file)
         X = data.drop(self.config.target_column, axis=1)  # Assuming target_column is the label column
@@ -22,4 +23,4 @@ class ModelTrainer:
         model_path = os.path.join(self.config.root_dir, self.config.model_name)
         # Here you would typically use joblib or pickle to save the model
         save_bin(model, model_path)
-        print(f"Model saved to {model_path}")
+        logger.info(f"Model saved to {model_path}")

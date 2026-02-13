@@ -1,6 +1,8 @@
 from drinks_quality import logger
 from drinks_quality.utils.common import read_yaml, create_directories
-from drinks_quality.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from drinks_quality.entity.config_entity import (DataIngestionConfig, DataValidationConfig,
+                                                  DataTransformationConfig,
+                                                    ModelTrainerConfig, ModelEvaluationConfig)
 from drinks_quality.constants import *
 
 class Configuration:
@@ -51,4 +53,13 @@ class Configuration:
             kernel=self.param_info.get("kernel", ""),
             target_column=self.schema_info.get("target", {}).get("name", "")
         )
-    
+    def get_model_evaluation_config(self):
+        model_evaluation_info = self.config_info.get("model_evaluation", {})
+        create_directories([model_evaluation_info.get("root_dir", "")])
+        return ModelEvaluationConfig(
+            root_dir=model_evaluation_info.get("root_dir", ""),
+            model_file=model_evaluation_info.get("model_file", ""),
+            data_file=model_evaluation_info.get("data_file", ""),
+            metrics_file_name=model_evaluation_info.get("metrics_file_name", ""),
+            target_column=self.schema_info.get("target", {}).get("name", "")
+        )
