@@ -1,0 +1,56 @@
+stages:
+  data_ingestion:
+    cmd: python src/drinks_quality/pipeline/data_ingestion_pipeline.py
+    deps:
+      - src/drinks_quality/pipeline/data_ingestion_pipeline.py
+      - src/drinks_quality/components/data_ingestion.py
+      - src/drinks_quality/config/configuration.py
+      - config.yaml
+    outs:
+      - artifacts/data_ingestion
+
+  data_validation:
+    cmd: python src/drinks_quality/pipeline/data_validation_pipeline.py
+    deps:
+      - src/drinks_quality/pipeline/data_validation_pipeline.py
+      - src/drinks_quality/components/data_validation.py
+      - src/drinks_quality/config/configuration.py
+      - config.yaml
+      - schema.yaml
+      - artifacts/data_ingestion
+    outs:
+      - artifacts/data_validation/report.yaml
+
+  data_transformation:
+    cmd: python src/drinks_quality/pipeline/data_transformation_pipeline.py
+    deps:
+      - src/drinks_quality/pipeline/data_transformation_pipeline.py
+      - src/drinks_quality/components/data_transformation.py
+      - src/drinks_quality/config/configuration.py
+      - config.yaml
+      - artifacts/data_ingestion
+    outs:
+      - artifacts/data_transformation
+
+  model_trainer:
+    cmd: python src/drinks_quality/pipeline/model_trainer_pipeline.py
+    deps:
+      - src/drinks_quality/pipeline/model_trainer_pipeline.py
+      - src/drinks_quality/components/model_trainer.py
+      - src/drinks_quality/config/configuration.py
+      - config.yaml
+      - artifacts/data_transformation
+    outs:
+      - artifacts/model_trainer
+
+  model_evaluation:
+    cmd: python src/drinks_quality/pipeline/model_evaluation_pipeline.py
+    deps:
+      - src/drinks_quality/pipeline/model_evaluation_pipeline.py
+      - src/drinks_quality/components/model_evaluation.py
+      - src/drinks_quality/config/configuration.py
+      - config.yaml
+      - artifacts/model_trainer
+      - artifacts/data_transformation
+    outs:
+      - artifacts/model_evaluation

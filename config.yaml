@@ -2,7 +2,7 @@ artifact_root: artifacts
 
 data_ingestion:
   root_dir: artifacts/data_ingestion
-  source_URL: https://drive.google.com/file/d/1Gxjzm3dQXFt1zPPnirFQw5JEOinv4AQU/view?usp=drive_link
+  source_URL: https://drive.google.com/file/d/1Gxjzm3dQXFt1zPPnirFQw5JEOinv4AQU/view?usp=sharing
   local_data_file: artifacts/data_ingestion/water_potability.csv
 data_validation:
   root_dir: artifacts/data_validation
